@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leo Naiyem Bank</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="home-page" class="container">
         <h1 class="text-center">Welcome To Leo Naiyem Bank</h1>
@@ -17,15 +20,15 @@
             <button id="login" class="btn btn-success">Login</button>
         </div>
     </div>
- <!-- Front page ends -->
-    
+    <!-- Front page ends -->
+
 
     <div id="transaction-area" class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="status deposit">
                     <h5>Deposit</h5>
-                    <h2>$00</h2>
+                    <h2>$ <span id="currentDeposit">00</span> </h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -37,7 +40,7 @@
             <div class="col-md-4">
                 <div class="status balance">
                     <h5>Balance</h5>
-                    <h2>$1260</h2>
+                    <h2>$ <span id="currentBalance">1260</span> </h2>
                 </div>
             </div>
         </div>
@@ -47,9 +50,10 @@
             <div class="col-md-6">
                 <div class="form-area">
                     <h4>Deposit</h4>
-                    <input id="deposit-amount" class="form-control" type="text" placeholder="$ amount you want to deposit"><br>
+                    <input id="deposit-amount" class="form-control" type="text"
+                        placeholder="$ amount you want to deposit"><br>
                     <button id="deposit-btn" class="btn btn-success">Deposit</button>
-                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-area">
@@ -73,21 +77,42 @@
 
     <script>
 
-     // Login button event handler
-       const loginBtn = document.getElementById("login");
-       loginBtn.addEventListener("click", function(){
-           const homePage = document.getElementById("home-page");
-           homePage.style.display ="none";
-           const transactionArea = document.getElementById("transaction-area");
-           transactionArea.style.display ="block";
-       })
+        // Login button event handler
+        const loginBtn = document.getElementById("login");
+        loginBtn.addEventListener("click", function () {
+            const homePage = document.getElementById("home-page");
+            homePage.style.display = "none";
+            const transactionArea = document.getElementById("transaction-area");
+            transactionArea.style.display = "block";
+        })
 
-     //Deposit button event handler
-       const depositBtn = document.getElementById("deposit-btn");
-       depositBtn.addEventListener("click", function(){
-            const depositAmount
-       })
-       
+        //Deposit button event handler
+        const depositBtn = document.getElementById("deposit-btn");
+        depositBtn.addEventListener("click", function () {
+            const depositAmount = document.getElementById("deposit-amount").value;
+            const depositNumber = parseFloat(depositAmount);
+
+            // const currentDeposit = document.getElementById("currentDeposit").innerText;
+            // const currentDepositNumber = parseFloat(currentDeposit);
+            // const totalDeposit = depositNumber + currentDepositNumber;
+            // document.getElementById("currentDeposit").innerText = totalDeposit;
+
+            updateSpanText("currentDeposit", depositNumber);
+            updateSpanText("currentBalance", depositNumber);
+            
+            document.getElementById("deposit-amount").value = "";
+
+        })
+
+        function updateSpanText(id, depositNumber){
+            const current = document.getElementById(id).innerText;
+            const currentNumber = parseFloat(current);
+            const totalAmount = depositNumber + currentNumber;
+            document.getElementById(id).innerText = totalAmount;
+
+        }
+
     </script>
 </body>
+
 </html>
